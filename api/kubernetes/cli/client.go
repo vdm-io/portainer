@@ -147,6 +147,7 @@ func (factory *ClientFactory) GetProxyKubeClient(endpointID, userID string) (*Ku
 	if ok {
 		return client.(*KubeClient), true
 	}
+
 	return nil, false
 }
 
@@ -371,6 +372,7 @@ func (factory *ClientFactory) MigrateEndpointIngresses(e *portainer.Endpoint, da
 				log.Error().Err(err).Msgf("Error getting ingresses in environment %d", environment.ID)
 				return err
 			}
+
 			for _, ingress := range ingresses {
 				oldController, ok := ingress.Annotations["ingress.portainer.io/ingress-type"]
 				if !ok {

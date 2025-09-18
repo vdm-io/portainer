@@ -32,7 +32,7 @@ func (kcl *KubeClient) TestFetchCronJobs(t *testing.T) {
 		kcl.cli = kfake.NewSimpleClientset()
 		kcl.instanceID = "test"
 		kcl.IsKubeAdmin = false
-		kcl.NonAdminNamespaces = []string{"default"}
+		kcl.SetClientNonAdminNamespaces([]string{"default"})
 
 		cronJobs, err := kcl.GetCronJobs("")
 		if err != nil {

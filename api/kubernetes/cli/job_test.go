@@ -35,7 +35,7 @@ func (kcl *KubeClient) TestFetchJobs(t *testing.T) {
 		kcl.cli = kfake.NewSimpleClientset()
 		kcl.instanceID = "test"
 		kcl.IsKubeAdmin = false
-		kcl.NonAdminNamespaces = []string{"default"}
+		kcl.SetClientNonAdminNamespaces([]string{"default"})
 
 		jobs, err := kcl.GetJobs("", false)
 		if err != nil {

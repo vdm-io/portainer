@@ -67,3 +67,27 @@ func Test_NamespaceAccessPoliciesDeleteNamespace_updatesPortainerConfig_whenConf
 		})
 	}
 }
+
+func TestKubeAdmin(t *testing.T) {
+	kcl := &KubeClient{}
+	require.False(t, kcl.GetIsKubeAdmin())
+
+	kcl.SetIsKubeAdmin(true)
+	require.True(t, kcl.GetIsKubeAdmin())
+
+	kcl.SetIsKubeAdmin(false)
+	require.False(t, kcl.GetIsKubeAdmin())
+}
+
+func TestClientNonAdminNamespaces(t *testing.T) {
+	kcl := &KubeClient{}
+
+	require.Empty(t, kcl.GetClientNonAdminNamespaces())
+
+	nss := []string{"ns1", "ns2"}
+	kcl.SetClientNonAdminNamespaces(nss)
+	require.Equal(t, nss, kcl.GetClientNonAdminNamespaces())
+
+	kcl.SetClientNonAdminNamespaces([]string{})
+	require.Empty(t, kcl.GetClientNonAdminNamespaces())
+}
